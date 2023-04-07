@@ -1,0 +1,102 @@
+
+{% extends 'Events/base.html' %}
+
+{% block content %}
+{% load static %}
+{% load custom_tags %}
+
+<!-- Upcoming events -->
+<h3 align="center">List of events happening this month in <mark style="background-color:yellow">EE department 
+</mark><br/><br/>( {% now "F Y" %} ) </h3>
+
+<br/><br/>
+<h5>Upcoming events</h5>
+{% if eeec == 0 %}
+    <div class = "content-section">
+      <center>
+        <h5 style="color:red;" class="blink_me">No upcoming events !!</h5>
+      </center>
+    </div>
+    {% else %}
+<div style="overflow-x: scroll; overflow-y:scroll; height:500px;" class = "content-section">
+  <div class = "card-columns">
+   
+    {% for ee in ee_event_data %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ ee.banner.url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="text-capitalize">Event type: {{ ee.eventtype }}</h5>
+          <p class="card-text">{{ ee.eventtype }} Name: {{ ee.name }}</p>
+
+          {% time_in_range ee.start_time ee.end_time ct as ee_status %}
+          {% if ee.date == cd %}
+
+          {% if ee_status != "inactive" %}
+          
+          <font style="color:green"><i class="fa fa-circle blink_me"></i></font>&nbsp;<font style="color:green;" class = "card-text">{{ ee_status }}</font></font>
+          <br><br>
+
+          {% endif %}
+
+          {% endif %}
+
+          <a href="/{{ ee.eventtype|lower|cut:" " }}-details/{{ ee.pk }}/" class="btn btn-primary">View details</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Conducted by department of {{ ee.department }} on {{ ee.date }}</small>
+        </div>
+      </div>
+    {% endfor %}
+
+</div>
+<br/>
+</div>
+{% endif %}
+
+
+<!-- upcoming events end -->
+
+
+<!-- Past events -->
+
+<h5>Past events</h5>
+{% if eeecp == 0 %}
+    <div class = "content-section">
+      <center>
+        <h5 style="color:red;" class="blink_me">No past event record !!</h5>
+      </center>
+    </div>
+    {% else %}
+<div style="overflow-x: scroll; overflow-y:scroll; height:500px;" class = "content-section">
+  <div class = "card-columns">
+  
+    {% for ee_p in ee_event_data_p %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ ee_p.banner.url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="text-capitalize">Event type: {{ ee_p.eventtype }}</h5>
+          <p class="card-text">{{ ee_p.eventtype }} Name: {{ ee_p.name }}</p>
+          <a href="/{{ ee_p.eventtype|lower|cut:" " }}-details/{{ ee_p.pk }}/" class="btn btn-primary">View details</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Conducted by department of {{ ee_p.department }} on {{ ee_p.date }}</small>
+        </div>
+      </div>
+    {% endfor %}
+  
+
+</div>
+</div>
+{% endif %}
+<!-- past events end -->
+
+
+
+
+
+<!-- <script src="https://cdn.logwork.com/widget/countdown.js"></script>
+<a href="https://logwork.com/countdown-wwyi" class="countdown-timer" data-timezone="Asia/Kolkata" data-date="2022-09-09 00:00">Countdown</a> -->
+
+
+{% endblock content %}
+

@@ -1,0 +1,102 @@
+
+{% extends 'Events/base.html' %}
+
+{% block content %}
+{% load static %}
+{% load custom_tags %}
+
+<!-- Upcoming events -->
+<h3 align="center">List of events happening this month in <mark style="background-color:yellow">Mechanical department 
+</mark><br/><br/>( {% now "F Y" %} ) </h3>
+
+<br/><br/>
+<h5>Upcoming events</h5>
+{% if mechec == 0 %}
+    <div class = "content-section">
+      <center>
+        <h5 style="color:red;" class="blink_me">No upcoming events !!</h5>
+      </center>
+    </div>
+    {% else %}
+<div style="overflow-x: scroll; overflow-y:scroll; height:500px;" class = "content-section">
+  <div class = "card-columns">
+   
+    {% for mech in mech_event_data %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ mech.banner.url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="text-capitalize">Event type: {{ mech.eventtype }}</h5>
+          <p class="card-text">{{ mech.eventtype }} Name: {{ mech.name }}</p>
+
+          {% time_in_range mech.start_time mech.end_time ct as mech_status %}
+          {% if mech.date == cd %}
+
+          {% if mech_status != "inactive" %}
+          
+          <font style="color:green"><i class="fa fa-circle blink_me"></i></font>&nbsp;<font style="color:green;" class = "card-text">{{ mech_status }}</font></font>
+          <br><br>
+
+          {% endif %}
+
+          {% endif %}
+
+          <a href="/{{ mech.eventtype|lower|cut:" " }}-details/{{ mech.pk }}/" class="btn btn-primary">View details</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Conducted by department of {{ mech.department }} on {{ mech.date }}</small>
+        </div>
+      </div>
+    {% endfor %}
+
+</div>
+<br/>
+</div>
+{% endif %}
+
+
+<!-- upcoming events end -->
+
+
+<!-- Past events -->
+
+<h5>Past events</h5>
+{% if mechecp == 0 %}
+    <div class = "content-section">
+      <center>
+        <h5 style="color:red;" class="blink_me">No past event record !!</h5>
+      </center>
+    </div>
+    {% else %}
+<div class = "content-section">
+<div class = "card-columns">
+  
+    {% for mech_p in mech_event_data_p %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ mech_p.banner.url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="text-capitalize">Event type: {{ mech_p.eventtype }}</h5>
+          <p class="card-text">{{ mech_p.eventtype }} Name: {{ mech_p.name }}</p>
+          <a href="/{{ mech_p.eventtype|lower|cut:" " }}-details/{{ mech_p.pk }}/" class="btn btn-primary">View details</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Conducted by department of {{ mech_p.department }} on {{ mech_p.date }}</small>
+        </div>
+      </div>
+    {% endfor %}
+  
+
+</div>
+</div>
+{% endif %}
+<!-- past events end -->
+
+
+
+
+
+<!-- <script src="https://cdn.logwork.com/widget/countdown.js"></script>
+<a href="https://logwork.com/countdown-wwyi" class="countdown-timer" data-timezone="Asia/Kolkata" data-date="2022-09-09 00:00">Countdown</a> -->
+
+
+{% endblock content %}
+

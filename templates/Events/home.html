@@ -1,0 +1,271 @@
+
+{% extends 'Events/base.html' %}
+
+{% block content %}
+{% load static %}
+{% load custom_tags %}
+
+<!-- Upcoming events -->
+<h3 align="center">List of events happening this month ( {% now "F Y" %} )</h3>
+
+<br/><br/>
+<h5>Upcoming events</h5>
+  
+{% if e == 0 %}
+    <div class = "content-section">
+      <center>
+        <h5 style="color:red;" class="blink_me">No upcoming events !!</h5>
+      </center>
+    </div>
+    {% else %}
+    
+<div style="overflow-x: scroll; overflow-y:scroll; height:500px;" class = "content-section">
+  <div class = "card-columns">
+
+    {% for f in fdp %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ f.banner.url }}" alt="Card image cap">
+        <div class="card-body">
+          
+
+         
+          <h5 class="text-capitalize">Event type: {{ f.eventtype }}</h5>
+          <p class="card-text">{{ f.eventtype }} Name: {{ f.name }}</p>
+          {% time_in_range f.start_time f.end_time ct as f_status %}
+          {% if f.date == cd %}
+
+
+          {% if f_status != "inactive" %}
+          
+          <font style="color:green"><i class="fa fa-circle blink_me"></i></font>&nbsp;<font style="color:green;" class = "card-text">{{ f_status }}</font></font>
+          <br><br>
+          {% endif %}
+
+          {% endif %}
+
+          
+
+
+          <a href="{% url 'fdp-detail' f.pk %}" class="btn btn-primary">View details</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Conducted by department of {{ f.department }} on {{ f.date }}</small>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% for s in seminar %}
+    <div class="card" style="width: 18rem; height:50%;">
+      <img class="card-img-top" src="{{ s.banner.url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="text-capitalize">Event type: {{ s.eventtype }}</h5>
+          <p class="card-text">{{ s.eventtype }} Name: {{ s.name }}</p>
+
+          {% time_in_range s.start_time s.end_time ct as s_status %}
+          {% if s.date == cd %}
+
+          {% if s_status != "inactive" %}
+          
+          <font style="color:green"><i class="fa fa-circle blink_me"></i></font>&nbsp;<font style="color:green;" class = "card-text">{{ s_status }}</font></font>
+          <br><br>
+
+          {% endif %}
+
+          {% endif %}
+          
+          <a href="{% url 'seminar-detail' s.pk %}" class="btn btn-primary">View details</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Conducted by department of {{ s.department }} on {{ s.date }}</small>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% for ce in clubevent %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ ce.banner.url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="text-capitalize">Event type: {{ ce.eventtype }}</h5>
+          <p class="card-text">{{ ce.eventtype }} Name: {{ ce.name }}</p>
+          
+          {% time_in_range ce.start_time ce.end_time ct as ce_status %}
+          {% if ce.date == cd %}
+
+          {% if ce_status != "inactive" %}
+          
+          <font style="color:green"><i class="fa fa-circle blink_me"></i></font>&nbsp;<font style="color:green;" class = "card-text">{{ ce_status }}</font></font>
+          <br><br>
+
+          {% endif %}
+
+          {% endif %}
+
+          <a href="{% url 'clubevent-detail' ce.pk %}" class="btn btn-primary">View details</a>
+        </div>
+        <div class="card-footer">
+          <small>Conducted by department of {{ ce.department }} on {{ ce.date }}</small>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% for c in competition %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ c.banner.url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="text-capitalize">Event type: {{ c.eventtype }}</h5>
+          <p class="card-text">{{ c.eventtype }} Name: {{ c.name }}</p>
+
+          {% time_in_range c.start_time c.end_time ct as c_status %}
+          {% if c.date == cd %}
+
+          {% if c_status != "inactive" %}
+          
+          <font style="color:green"><i class="fa fa-circle blink_me"></i></font>&nbsp;<font style="color:green;" class = "card-text">{{ c_status }}</font></font>
+          <br><br>
+
+          {% endif %}
+
+          {% endif %}
+
+          <a href="{% url 'competition-detail' c.pk %}" class="btn btn-primary">View details</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Conducted by department of {{ c.department }} on {{ c.date }}</small>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% for oe in otherevents %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{ oe.banner.url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="text-capitalize">Event type: {{ oe.eventtype }}</h5>
+          <p class="card-text">{{ oe.eventtype }} Name: {{ oe.name }}</p>
+
+          {% time_in_range oe.start_time oe.end_time ct as oe_status %}
+          {% if oe.date == cd %}
+
+          {% if oe_status != "inactive" %}
+          
+          <font style="color:green"><i class="fa fa-circle blink_me"></i></font>&nbsp;<font style="color:green;" class = "card-text">{{ oe_status }}</font></font>
+          <br><br>
+
+          {% endif %}
+
+          {% endif %}
+
+          <a href="{% url 'otherevent-detail' oe.pk %}" class="btn btn-primary">View details</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Conducted by department of {{ oe.department }} on {{ oe.date }}</small>
+        </div>
+      </div>
+    {% endfor %}  
+</div>
+<br/>
+</div>
+{% endif %}
+
+
+
+
+<!-- upcoming events end -->
+
+
+<!-- Past events -->
+
+<h5>Past events</h5>
+{% if pe == 0 %}
+    <div class = "content-section">
+      <center>
+        <h5 style="color:red;" class="blink_me">No past event record !!</h5>
+      </center>
+    </div>
+    {% else %}
+<div style="overflow-x: scroll; overflow-y:scroll; height:500px;" class = "content-section">
+<div class = "card-columns">
+   
+  {% for pf in p_fdp %}
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ pf.banner.url }}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="text-capitalize">Event type: {{ pf.eventtype }}</h5>
+        <p class="card-text">{{ pf.eventtype }} Name: {{ pf.name }}</p>
+        <a href="{% url 'fdp-detail' pf.pk %}" class="btn btn-primary">View details</a>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Conducted by department of {{ pf.department }} on {{ pf.date }}</small>
+      </div>
+    </div>
+  {% endfor %}
+
+  {% for ps in p_seminar %}
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ ps.banner.url }}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="text-capitalize">Event type: {{ ps.eventtype }}</h5>
+        <p class="card-text">{{ ps.eventtype }} Name: {{ ps.name }}</p>
+        <a href="{% url 'seminar-detail' ps.pk %}" class="btn btn-primary">View details</a>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Conducted by department of {{ ps.department }} on {{ ps.date }}</small>
+      </div>
+    </div>
+  {% endfor %}
+
+  {% for pce in p_clubevent %}
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ pce.banner.url }}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="text-capitalize">Event type: {{ pce.eventtype }}</h5>
+        <p class="card-text">{{ pce.eventtype }} Name: {{ pce.name }}</p>
+        <a href="{% url 'clubevent-detail' pce.pk %}" class="btn btn-primary">View details</a>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Conducted by department of {{ pce.department }} on {{ pce.date }}</small>
+      </div>
+    </div>
+  {% endfor %}
+
+  {% for pc in p_competition %}
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ pc.banner.url }}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="text-capitalize">Event type: {{ pc.eventtype }}</h5>
+        <p class="card-text">{{ pc.eventtype }} Name: {{ pc.name }}</p>
+        <a href="{% url 'competition-detail' pc.pk %}" class="btn btn-primary">View details</a>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Conducted by department of {{ pc.department }} on {{ pc.date }}</small>
+      </div>
+    </div>
+  {% endfor %}
+
+  {% for poe in p_otherevents %}
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ poe.banner.url }}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="text-capitalize">Event type: {{ poe.eventtype }}</h5>
+        <p class="card-text">{{ poe.eventtype }} Name: {{ poe.name }}</p>
+        <a href="{% url 'otherevent-detail' poe.pk %}" class="btn btn-primary">View details</a>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Conducted by department of {{ poe.department }} on {{ poe.date }}</small>
+      </div>
+    </div>
+  {% endfor %}  
+</div>
+</div>
+{% endif %}
+<!-- past events end -->
+
+
+
+
+
+<!-- <script src="https://cdn.logwork.com/widget/countdown.js"></>
+<a href="https://logwork.com/countdown-wwyi" class="countdown-timer" data-timezone="Asia/Kolkata" data-date="2022-09-09 00:00">Countdown</a> -->
+
+
+{% endblock content %}
+

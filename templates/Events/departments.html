@@ -1,0 +1,88 @@
+{% extends 'Events/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<h2>Departments</h2>
+<br><br>
+
+<div class = "content-section">
+<div class="row">
+
+<div class="col-sm-4">
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{% static 'images/IT.png' %}" alt="information technology">
+    <div class="card-body">
+      <h5 class="card-title">INFORMATION TECHNOLOGY</h5>
+      <p class="card-text"></p>
+      <a href="{% url 'it-department' %}" class="btn btn-primary">View events</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-sm-4">
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{% static 'images/CSE.png' %}" alt="computer science and engineering">
+        <div class="card-body">
+          <h5 class="card-title">COMPUTER SCIENCE AND ENGINEERING</h5>
+          <p class="card-text"></p>
+          <a href="{% url 'cs-department' %}" class="btn btn-primary">View events</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{% static 'images/CE.png' %}" alt="civil engineering">
+            <div class="card-body">
+              <h5 class="card-title">CIVIL ENGINEERING</h5>
+              <p class="card-text"></p>
+              <a href="{% url 'civil-department' %}" class="btn btn-primary">View events</a>
+            </div>
+          </div>
+</div>
+</div>
+<br><br>
+
+<div class = "row">
+  <div class="col-sm-4">
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{% static 'images/ec.jpg' %}" alt="civil engineering">
+        <div class="card-body">
+          <h5 class="card-title">Electrical Communication</h5>
+          <p class="card-text"></p>
+          <a href="{% url 'ec-department' %}" class="btn btn-primary">View events</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{% static 'images/ee.jpg' %}" alt="civil engineering">
+          <div class="card-body">
+            <h5 class="card-title">Electrical Electronics</h5>
+            <p class="card-text"></p>
+            <a href="{% url 'ee-department' %}" class="btn btn-primary">View events</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{% static 'images/me.jpg' %}" alt="Mechnacial engineering">
+            <div class="card-body">
+              <h5 class="card-title">Mechnacial engineering</h5>
+              <p class="card-text"></p>
+              <a href="{% url 'mech-department' %}" class="btn btn-primary">View events</a>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+    
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,43 @@
+{% extends 'Events/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<h1>{{ s_data.eventtype }} details</h1>
+<br>
+
+<div class = content-section>
+<br>
+
+<p style = "font-size:20px; color:black;"><mark style = "background-color:yellow">{{ s_data.name }}</mark> by department of {{ s_data.department }}</p>
+
+<div class = container-float>
+    <img src = {{ s_data.banner.url }} height=auto width = auto>
+</div>
+
+<br>
+{% if s_data.mode == "OFFLINE" %}
+<p style = "font-size:15px; color:black;">MODE: <font style="color:red">{{ s_data.mode }}</font></p>
+{% elif s_data.mode == "ONLINE" %}
+<p style = "font-size:15px; color:black;">MODE: <font style="color:green">{{ s_data.mode }}</font></p>
+<p style = "font-size:15px; color:black;">Meet Url: <a href = "{{ s_data.meet_url }}"><font style="color: purple;">{{ s_data.meet_url }}</font></a></a></p>
+{% endif %}
+
+<h5>Date:</h5>
+<p class="calendar">{{ s_data.date | date:'d'  }}<em>{% now "M Y" %}</em></p>
+
+<p style = "font-size:15px; color:black;">TIMINGS: {{ s_data.start_time }} to {{ s_data.end_time }}</p>
+
+<p style = "font-size:15px; color:black;">VENUE: <mark style = "background-color:yellow">{{ s_data.venue }}</mark></p>
+
+<p style = "font-size:15px; color:black;">GUEST: <font style="font-weight: bold;">{{ s_data.guest }}</font></p>
+
+<p style = "font-size:15px; color:black;">CONVENOR: <font style="font-weight: bold;">{{ s_data.convenor }}</font></p>
+
+
+<br>
+</div>
+
+
+
+{% endblock content %}

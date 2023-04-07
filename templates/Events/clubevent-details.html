@@ -1,0 +1,43 @@
+{% extends 'Events/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<h1>{{ ce_data.eventtype }} details</h1>
+<br>
+
+<div class = content-section>
+<br>
+
+<p style = "font-size:20px; color:black;"><mark style = "background-color:yellow">{{ ce_data.name }}</mark> by department of {{ ce_data.department }}</p>
+
+<div class = container-float>
+    <img src = {{ ce_data.banner.url }} height=auto width = auto>
+</div>
+
+<br>
+{% if ce_data.mode == "OFFLINE" %}
+<p style = "font-size:15px; color:black;">MODE: <font style="color:red">{{ ce_data.mode }}</font></p>
+{% elif ce_data.mode == "ONLINE" %}
+<p style = "font-size:15px; color:black;">MODE: <font style="color:green">{{ ce_data.mode }}</font></p>
+<p style = "font-size:15px; color:black;">Meet Url: <a href = "{{ ce_data.meet_url }}"><font style="color: purple;">{{ s_data.meet_url }}</font></a></a></p>
+{% endif %}
+
+<h5>Date:</h5>
+<p class="calendar">{{ ce_data.date | date:'d'  }}<em>{% now "M Y" %}</em></p>
+
+<p style = "font-size:15px; color:black;">TIMINGS: {{ ce_data.start_time }} to {{ ce_data.end_time }}</p>
+
+<p style = "font-size:15px; color:black;">VENUE: <mark style = "background-color:yellow">{{ ce_data.venue }}</mark></p>
+
+<p style = "font-size:15px; color:black;">GUEST: <font style="font-weight: bold;">{{ ce_data.guest }}</font></p>
+
+<p style = "font-size:15px; color:black;">CONVENOR: <font style="font-weight: bold;">{{ ce_data.convenor }}</font></p>
+
+
+<br>
+</div>
+
+
+
+{% endblock content %}

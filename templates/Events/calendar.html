@@ -1,0 +1,19 @@
+{% extends 'Events/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<center> 
+    <h2> Overall Event List </h2>
+</center>
+<div class = "content-section">
+<div class="clearfix">
+	<a class="btn btn-info right" href="{% url 'calendar' %}?{{ next_month }} "> Next Month </a>
+    <a class="btn btn-info left" href="{% url 'calendar' %}?{{ prev_month }}"> Previous Month </a>
+</div>
+
+{{ calendar }}
+</div>
+
+
+   {% endblock content %}

@@ -1,0 +1,43 @@
+{% extends 'Events/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<h1>{{ oe_data.eventtype }} Event details</h1>
+<br>
+
+<div class = content-section>
+<br>
+
+<p style = "font-size:20px; color:black;"><mark style = "background-color:yellow">{{ oe_data.name }}</mark> by department of {{ oe_data.department }}</p>
+
+<div class = container-float>
+    <img src = {{ oe_data.banner.url }} height=auto width = auto>
+</div>
+
+<br>
+{% if oe_data.mode == "OFFLINE" %}
+<p style = "font-size:15px; color:black;">MODE: <font style="color:red">{{ oe_data.mode }}</font></p>
+{% elif oe_data.mode == "ONLINE" %}
+<p style = "font-size:15px; color:black;">MODE: <font style="color:green">{{ oe_data.mode }}</font></p>
+<p style = "font-size:15px; color:black;">Meet Url: <a href = "{{ oe_data.meet_url }}"><font style="color: purple;">{{ oe_data.meet_url }}</font></a></a></p>
+{% endif %}
+
+<h5>Date:</h5>
+<p class="calendar">{{ oe_data.date | date:'d'  }}<em>{% now "M Y" %}</em></p>
+
+<p style = "font-size:15px; color:black;">TIMINGS: {{ oe_data.start_time }} to {{ oe_data.end_time }}</p>
+
+<p style = "font-size:15px; color:black;">VENUE: <mark style = "background-color:yellow">{{ oe_data.venue }}</mark></p>
+
+<p style = "font-size:15px; color:black;">GUEST: <font style="font-weight: bold;">{{ oe_data.guest }}</font></p>
+
+<p style = "font-size:15px; color:black;">CONVENOR: <font style="font-weight: bold;">{{ oe_data.convenor }}</font></p>
+
+
+<br>
+</div>
+
+
+
+{% endblock content %}
